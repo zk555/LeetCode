@@ -10,7 +10,7 @@ public class Solution {
             return null;
         }
 
-        Node ptr = head;
+        Node ptr = head;  //指针 ，head 和ptr 同时指向node头位置
         while (ptr != null) {
             Node newNode = new Node(ptr.val);
             newNode.next = ptr.next;
@@ -35,5 +35,18 @@ public class Solution {
             ptrNewList = ptrNewList.next;
         }
         return headOld;
+    }
+
+    public static void main(String[] args) {
+        Node node1 = new Node(5);
+        Node node2 = new Node(6);
+        Node node3 = new Node(4);
+        Node node4 = new Node(7);
+        node1.random=node2;
+        node1.next=node2;
+        node2.next =node3;
+        node2.random=node4;
+        node3.next=node4;
+        new Solution().copyRandomList(node1);
     }
 }

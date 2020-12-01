@@ -4,6 +4,10 @@ import java.util.Arrays;
 
 /**
  * 先排序再遍历一次 o(n*log(n))
+ *
+ * 1 2 2 3 3 4
+ *
+ * t = 1
  */
 public class Solution {
 
@@ -24,5 +28,12 @@ public class Solution {
             t = A[i];
         }
         return rs;
+    }
+
+    public static void main(String[] args) {
+        int[] temp ;
+        temp= new int[]{1,2,2,4,7};
+        int i = new Solution().minIncrementForUnique(temp);
+        System.out.println("curmax = " + i);
     }
 }

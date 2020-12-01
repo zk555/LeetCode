@@ -1,7 +1,7 @@
 package hash相关.q1_两数之和.f1;
 
 /**
- * 暴力法 o(n^2)
+ * 暴力法 o(n^2)  求两个数 之和 = 第三个数
  */
 class Solution {
     public int[] twoSum(int[] nums, int target) {

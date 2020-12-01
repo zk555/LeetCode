@@ -27,4 +27,9 @@ public class Solution {
         }
         return false;
     }
+
+    public static void main(String[] args) {
+        boolean palindrome = new Solution().isPalindrome(12321);
+        System.out.println("palindrome = " + palindrome);
+    }
 }

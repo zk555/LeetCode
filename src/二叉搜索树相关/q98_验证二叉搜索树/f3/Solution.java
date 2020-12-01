@@ -17,9 +17,9 @@ public class Solution {
         Queue<Integer> min = new LinkedList<>();
         Queue<Integer> max = new LinkedList<>();
         while (!queue.isEmpty()) {
-            TreeNode temp = queue.poll();
-            Integer maxt = max.poll();
-            Integer mint = min.poll();
+            TreeNode temp = queue.poll();  //10
+            Integer maxt = max.poll();   // null
+            Integer mint = min.poll();   //null
 
             if (mint != null && temp.val <= mint) {
                 return false;

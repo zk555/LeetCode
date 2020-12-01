@@ -1,5 +1,8 @@
 package 链表操作.q2_两数相加;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 两次遍历
  * 第一次遍历：两个链表对应每个节点分别取和，若含有空节点则空节点取0，产生一个新链表。
@@ -32,7 +35,6 @@ public class Solution {
                 l2 = l2.next;
             }
         }
-
         temp = rs;
         while (temp != null) {
             if (temp.val >= 10) {
@@ -46,5 +48,20 @@ public class Solution {
         }
 
         return rs;
+    }
+
+    public static void main(String[] args) {
+        ListNode node1 = new ListNode(5);
+        ListNode node2 = new ListNode(6);
+        ListNode node3 = new ListNode(4);
+        ListNode node4 = new ListNode(7);
+        node2.next = node3;
+        node1.next = node2;
+//        node3.next = node4;
+        ListNode listNode = new zk_Solution().addTwoNumbers(node1, node2);
+        while (listNode!=null){
+            System.out.println("listNode = " + listNode.val);
+            listNode= listNode.next;
+        }
     }
 }
