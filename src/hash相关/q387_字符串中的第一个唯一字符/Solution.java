@@ -12,7 +12,9 @@ public class Solution {
         int n = s.length();
         for (int i = 0; i < n; i++) {
             char c = s.charAt(i);
-            count.put(c, count.getOrDefault(c, 0) + 1);
+            Integer orDefault = count.getOrDefault(c, 0);
+            System.out.println(orDefault);
+            count.put(c, count.getOrDefault(c, 0) + 1); //有key 就直接取出key ,没key使用默认值
         }
 
         for (int i = 0; i < n; i++) {
@@ -21,5 +23,11 @@ public class Solution {
             }
         }
         return -1;
+    }
+
+    public static void main(String[] args) {
+        String s = "aa";
+        Solution solution  = new Solution();
+        int i = solution.firstUniqChar(s);
     }
 }

@@ -1,5 +1,6 @@
 package hash相关.q1_两数之和.f2;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,5 +17,15 @@ public class Solution {
             map.put(nums[i], i);
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        Date dd =new Date();
+        int[] nums= {1,2,3,4,5,6};
+        int[] ints = solution.twoSum(nums, 6);
+        System.out.println(ints[0]);
+        System.out.println(ints[1]);
+        System.out.printf("耗时：" + (new Date().getTime()-dd.getTime()) );
     }
 }
