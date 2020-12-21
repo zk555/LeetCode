@@ -1,23 +1,6 @@
-package 数据结构与算法.树.二叉树;
+package 数据结构与算法.树.线索化二叉树;
 
-/**
- * 分析：
- *      1， 创建要一个二叉树。
- *      2.前序遍历
- *           2.1 先输出当前节点，
- *           2.2 如果左子节点不为null ，递归遍历左子树
- *           2.3 如果右子节点不为空，递归遍历右子树
- *      3.前序遍历
- *          3.1 如果左子节点不为null ，递归遍历左子树
- *          3.2 输出当前节点，
- *          3.3 如果右子节点不为空，递归遍历右子树
- *      4. 后续遍历
- *          4.1 如果左子节点不为null ，递归遍历左子树
- *  *       4.2 如果右子节点不为空，递归遍历右子树
- *  *       4.3 输出当前节点，
- */
 public class BinaryTreeDemo {
-
     public static void main(String[] args) {
         //创建二叉树
         HeroNode root =new HeroNode(1,"宋江");
@@ -25,25 +8,6 @@ public class BinaryTreeDemo {
         HeroNode node2 =new HeroNode(3,"卢俊义");
         HeroNode node3 =new HeroNode(4,"林冲");
         HeroNode node4 =new HeroNode(5,"关胜");
-
-        root.setLeft(node1);
-        root.setRight(node2);
-        node2.setRight(node3);
-        node2.setLeft(node4);
-
-
-//        System.out.println("前序遍历");
-        BinaryTree binaryTree =new BinaryTree();
-        binaryTree.setRoot(root);
-//        binaryTree.preOrder();
-        System.out.println("中序遍历");
-
-        binaryTree.delNode(5);
-
-        binaryTree.infixOrder();
-//
-//        System.out.println("后序遍历");
-//        binaryTree.postOrder();
     }
 }
 
@@ -52,8 +16,57 @@ class BinaryTree {
 
     private HeroNode root;
 
+    private HeroNode pre = null;  //总是指向前驱节点
+
     public void setRoot(HeroNode root) {
         this.root = root;
+    }
+
+    //线索化二叉树 ,node 当前线索化节点
+    public void threaddelNodes(HeroNode node){
+        if (node == null){
+            return;
+        }
+        // 1. 先线索化处理左子树
+        threaddelNodes(node.getLeft());
+        // 2. 线索化当前节点
+        // 2.1 处理当前节点的左指针
+        if (node.getLeft() == null){
+            // 当前节点的做指针 指向 前驱节点
+            node.setLeft(pre);
+            node.setLeftType(1);
+        }
+        //2.2 处理后继节点
+        if (pre != null && pre.getRight() == null) {
+            pre.setRight(node);  // 前驱节点的右指针 指向当前节点
+            pre.setRighType(1);
+        }
+        // 每处理一个节点，让当前节点是下一个节点的前驱节点 ( 指针后移完成后，再计算前一个节点的后继节点)
+        pre = node;
+        // 3. 线索化右子节点
+        threaddelNodes(node.getRight());
+    }
+
+    //遍历线索化二叉树
+    public void threadedList(){
+        HeroNode node = root; // 存储当前遍历的节点，root 开始
+        while (node != null){
+
+            // 找到线索化的第一个节点 leftType ==1
+            while (node.getLeftType() == 0 ){
+                node = node.getLeft();
+            }
+
+            //打印当前节点，
+            System.out.println(node);
+            //如果当前节点的右指针是后继节点直接输出
+            while (node.getRighType() == 1){
+                node =node.getRight();
+                System.out.println(node.getRight());
+            }
+            //当 不是后序节点 ，是右子树
+            node =node.getRight();
+        }
     }
 
     //删除节点
@@ -90,8 +103,6 @@ class BinaryTree {
     }
 }
 
-
-//创建 节点
 class HeroNode{
 
     private int no;
@@ -101,6 +112,26 @@ class HeroNode{
     private HeroNode left;  //左子
 
     private HeroNode right;
+
+    private int leftType;//0 左子树， 1 前序节点
+
+    private int righType; //0 右子树， 1 后继节点
+
+    public int getLeftType() {
+        return leftType;
+    }
+
+    public void setLeftType(int leftType) {
+        this.leftType = leftType;
+    }
+
+    public int getRighType() {
+        return righType;
+    }
+
+    public void setRighType(int righType) {
+        this.righType = righType;
+    }
 
     public int getNo() {
         return no;
@@ -182,17 +213,17 @@ class HeroNode{
 
     //删除节点
     public void delNode(int no){
-       if (this.left != null && this.left.no ==no){
-           this.left = null;
-           return;
-       }
-       if (this.right != null && this.right.no ==no){
+        if (this.left != null && this.left.no ==no){
+            this.left = null;
+            return;
+        }
+        if (this.right != null && this.right.no ==no){
             this.right = null;
             return;
-       }
-       if (this.left != null){
+        }
+        if (this.left != null){
             this.left.delNode(no);
-       }
+        }
         if (this.right != null){
             this.right.delNode(no);
         }
