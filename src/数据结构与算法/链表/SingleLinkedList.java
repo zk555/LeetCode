@@ -41,6 +41,7 @@ class  LinkedList{
 
         HeroNode temp = headNode.next;
 
+
         while (temp.next !=null){
             System.out.println(temp.toString());
             temp =  temp.next;
