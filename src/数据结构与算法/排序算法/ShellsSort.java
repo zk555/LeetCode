@@ -10,8 +10,8 @@ package 数据结构与算法.排序算法;
 public class ShellsSort {
 
     public static void main(String[] args) {
-        int[] nums = {8,9,1,7,6,3,2,10};
-        sort1(nums);
+        int[] nums = {8,9,1,7,2,3,5,4,0,10};
+        sort2(nums);
 //        for (int i = 0;i<nums.length;i++){
 //            System.out.print(nums[i] + ",");
 //        }
@@ -25,7 +25,7 @@ public class ShellsSort {
         int num = 0;
         for (int gap =nums.length/2; gap>0; gap/=2) { //根据分析 每次按下标的一定增量分组
             for (int i = gap ; i < nums.length; i++) {  //每次处理1组组？
-                for (int j = i - gap; j >= 0; j -= gap) {// 1,2,3,4   ,2>0 , i=2 ,i<4  / j=0  0 -2 = -2
+                for (int j = i - gap; j >= 0; j -= gap) {
                     if (nums[i] < nums[j]) {
                         num = nums[j];
                         nums[j] = nums[i];

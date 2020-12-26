@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *   ,：
+ *  二分法查找思路：
  *          1. 首先确定中间值下标 mid = l +r /2
  *          2. 然后将需要查找的数做比较
  *          3. 根据 arr[mid] = findVal ? 做递归
