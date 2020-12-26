@@ -3,7 +3,7 @@ package 其他.丢玻璃球;
 import java.util.Scanner;
 
 /**
- * F(N) = min{ max(1(碎 了), F(N - 1) + 1(没碎)), max(2, F(N - 2) + 1), max(3, F(N - 3) + 1), …… , max(N - 1, F(1))
+ * F(N) = min{ max(1(碎了), F(N - 1) + 1(没碎)), max(2, F(N - 2) + 1), max(3, F(N - 3) + 1), …… , max(N - 1, F(1))
  */
 public class Solution {
     public static void main(String[] args) {
