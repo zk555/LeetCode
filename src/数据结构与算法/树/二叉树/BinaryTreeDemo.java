@@ -16,7 +16,7 @@ package 数据结构与算法.树.二叉树;
  *  *       4.2 如果右子节点不为空，递归遍历右子树
  *  *       4.3 输出当前节点，
  */
-public class BinaryTreeDemo {
+    public class BinaryTreeDemo {
 
     public static void main(String[] args) {
         //创建二叉树
