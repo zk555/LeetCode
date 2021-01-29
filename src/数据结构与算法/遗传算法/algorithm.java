@@ -1,5 +1,8 @@
 package 数据结构与算法.遗传算法;
 
+import java.math.BigInteger;
+import java.util.*;
+
 /**
  * ClassName algorithm
  * Description
@@ -45,4 +48,120 @@ package 数据结构与算法.遗传算法;
 public class algorithm {
 
     //1. 数学建模，将这个实际问题映射成遗传算法的数学模型
+
+
+    public static void main(String[] args) {
+        List<WarehourcePriorityGoods> wpgList = new ArrayList<>();
+        WarehourcePriorityGoods warehourcePriorityGoods = new WarehourcePriorityGoods("100",10);
+        WarehourcePriorityGoods warehourcePriorityGoods1 = new WarehourcePriorityGoods("101",11);
+        WarehourcePriorityGoods warehourcePriorityGoods2 = new WarehourcePriorityGoods("102",12);
+        WarehourcePriorityGoods warehourcePriorityGoods3 = new WarehourcePriorityGoods("103",13);
+        wpgList.add(warehourcePriorityGoods);
+        wpgList.add(warehourcePriorityGoods1);
+        wpgList.add(warehourcePriorityGoods2);
+        wpgList.add(warehourcePriorityGoods3);
+
+        Map<String, List<String>> warehouseForGoods = new LinkedHashMap<>();
+        List<String> goodsNos = new ArrayList<>();
+        goodsNos.add("100");
+        goodsNos.add("101");
+        warehouseForGoods.put("200",goodsNos);
+
+        List<String> goodsNos1 = new ArrayList<>();
+        goodsNos.add("102");
+        goodsNos.add("103");
+        warehouseForGoods.put("300",goodsNos);
+
+        String[][] strings = initialPopulation(wpgList, warehouseForGoods);
+
+        for(int m=0;m<strings.length;m++){//控制行数
+            for(int n=0;n<strings[m].length;n++){//一行中有多少个元素（即多少列）
+                System.out.print(strings[m][n]+" ");
+            }
+            System.out.println();
+        }
+
+    }
+
+    /**
+     * @param wpgList  仓库待排序列表，仓库覆盖商品数和仓库优先级
+     * @param warehouseForGoods  key :goodsNo value: 库房号  linkedHashMap 有序，很重要
+     * @return  初始种群 种群中某一个染色体的排列顺序是跟 warehouseForGoods 一致的
+     */
+    public static String[][]  initialPopulation(List<WarehourcePriorityGoods> wpgList, Map<String, List<String>> warehouseForGoods) { // 初始化NP个字符串，代表一个种群
+        String[][] ipop = new String[50][]; //ipop为字符串数组，族群大小
+        for (int i = 0; i < 50; i++) {
+            //ipop[i] = initialPop(sku);
+            //如果是第一个选择所有组合中最佳的一个，剩余的随机选取
+            String[] bestPopulation=new String[warehouseForGoods.size()];
+            if(i==0){
+                Iterator<Map.Entry<String, List<String>>> iterator = warehouseForGoods.entrySet().iterator();
+                int j=0;
+                while (iterator.hasNext()){
+                    List<String> warehouseno=iterator.next().getValue();
+                    List<WarehourcePriorityGoods> li=new ArrayList<WarehourcePriorityGoods>();
+                    for(String str:warehouseno){
+                        for(WarehourcePriorityGoods wpg:wpgList){
+                            if(str.equals(wpg.getWareHouseNo())){
+                                li.add(wpg);
+                                continue;
+                            }
+                        }
+
+                    }
+                    Collections.sort(li);
+                    bestPopulation[j]=li.get(0).getWareHouseNo();
+                    j++;
+                }
+                ipop[i] =bestPopulation;
+            }else{
+                String[] bestPopulationtem=new String[warehouseForGoods.size()];
+                Random random=new Random();
+                int j=0;
+                Iterator<Map.Entry<String, List<String>>> iterator = warehouseForGoods.entrySet().iterator();
+                while (iterator.hasNext()){
+                    List<String> warehouseno=iterator.next().getValue();
+                    bestPopulationtem[j]=warehouseno.get(random.nextInt(warehouseno.size()));
+                    j++;
+                }
+                ipop[i] =bestPopulationtem;
+            }
+
+        }
+        return ipop;
+    }
+}
+
+
+class WarehourcePriorityGoods implements Comparable<WarehourcePriorityGoods>{
+
+    private String wareHouseNo;
+
+    private int level;
+
+    public WarehourcePriorityGoods(String wareHouseNo, int level) {
+        this.wareHouseNo = wareHouseNo;
+        this.level = level;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public String getWareHouseNo() {
+        return wareHouseNo;
+    }
+
+    public void setWareHouseNo(String wareHouseNo) {
+        this.wareHouseNo = wareHouseNo;
+    }
+
+    @Override
+    public int compareTo(WarehourcePriorityGoods o) {
+        return this.level - o.getLevel();
+    }
 }
