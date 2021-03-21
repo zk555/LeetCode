@@ -1,5 +1,7 @@
 package hash相关.q1_两数之和.f2;
 
+import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
