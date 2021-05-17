@@ -9,30 +9,32 @@ import java.util.List;
 public class zk_Solution {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode rs = new ListNode(l1.val + l2.val); //初始化第一位
-        ListNode node1 = l1.next;
-        ListNode node2 = l2.next;
+        ListNode rs = new ListNode(l1.val + l2.val);
+        ListNode ln1 = l1.next;
+        ListNode ln2 = l2.next;
         ListNode temp = rs;
-        while (node1 != null || node2 != null) {
+
+        while (ln1 != null || ln2 != null) {
             int a = 0;
             int b = 0;
-            if (node1 != null) {
-                a = node1.val;
+            if (ln1 != null) {
+                a = ln1.val;
             }
-            if (node2 != null) {
-                b = node2.val;
+            if (ln2 != null) {
+                b = ln2.val;
             }
-            temp.next = new ListNode(a + b); //如果链表不为空，则存入下一个节点
+            temp.next = new ListNode(a + b);
             temp = temp.next;
-            if (node1 != null) {
-                node1 = node1.next;
+            if (ln1 != null) {
+                ln1 = ln1.next;
             }
-            if (node2 != null) {
-                node2 = node2.next;
+            if (ln2 != null) {
+                ln2 = ln2.next;
             }
         }
+
         temp = rs;
-        //  11 , 1 ,2
+
         while (temp != null) {
             if (temp.val > 10) {
                 temp.val = temp.val - 10;
@@ -42,6 +44,7 @@ public class zk_Solution {
                 temp.next.val = temp.next.val + 1;
             }
             temp = temp.next;
+
         }
         return rs;
     }

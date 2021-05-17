@@ -1,5 +1,6 @@
 package 字符串操作.q14_最长公共前缀;
 
+
 /**
  * 水平扫描 o(n)
  */
@@ -19,6 +20,7 @@ public class Solution {
             }
             char temp = strs[0].charAt(i);
             for (int k = 1; k < strs.length; k++) {
+                // 返回条件，字符串前缀不等 || 找到最短字符串
                 if (strs[k].length() == i || temp != strs[k].charAt(i)) {
                     return pre;
                 }
