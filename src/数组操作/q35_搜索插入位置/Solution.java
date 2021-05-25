@@ -7,7 +7,7 @@ package 数组操作.q35_搜索插入位置;
  * @create 2021-05-19 20:52
  **/
 public class Solution {
-
+    // 二分法，计算中间值
     // nums = [1,3,4]   target : 2
     public int searchInsert(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++) {
