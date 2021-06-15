@@ -52,12 +52,10 @@ public class QuickSort {
             while (arr[r] > pivot){
                 r -=1;
             }
-
             // pivot的左边和右边值已经全部分堆了
             if ( l >= r) {
                 break;
             }
-
             //交换
             temp = arr[l];
             arr[l] = arr[r];
@@ -67,23 +65,19 @@ public class QuickSort {
             if (arr[l] == pivot){
                 r -= 1;
             }
-
             // 交换完成后，发现这个arr[r] = pivot值 应该pivot后移动
             if (arr[r] == pivot){
                 l += 1;
             }
         }
-
         if (l == r) {
             l +=1 ;
             r -=1 ;
         }
-
         //递归 处理左面排序
         if (left < r ){
             sort(arr,left,r);
         }
-
         //递归 处理右面排序
         if (right > l  ){
             sort(arr,l,right);
