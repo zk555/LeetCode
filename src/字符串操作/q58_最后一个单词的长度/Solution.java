@@ -9,18 +9,18 @@ package 字符串操作.q58_最后一个单词的长度;
 public class Solution {
     // 右 --> 左遍历  第一个非空格开始,再遇到空格结束
     public int lengthOfLastWord(String s) {
-        int length = s.length() -1;
+        int length = s.length() - 1;
         int count = 0;
         while (length >= 0) {
-            if (s.charAt(length) == ' '){
-                if (count == 0){
-                    length -- ;
+            if (s.charAt(length) == ' ') {
+                if (count == 0) {
+                    length--;
                     continue;
                 }
                 break;
             }
-            count ++;
-            length -- ;
+            count++;
+            length--;
         }
         return count;
     }
